@@ -2,5 +2,11 @@ Flask
 aiohttp
 requests
 gunicorn
+dotenv
+itertools
+os
+asyncio
+send_from_directory
+
 
 
