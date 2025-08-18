@@ -34,6 +34,7 @@ def get_next_api_key():
 # Try-on logic
 # ----------------------------
 async def try_on(session, model_img, dress_img):
+    print("in try on method")
     api_key = get_next_api_key()
     headers = {"Content-Type": "application/json", "X-API-KEY": api_key}
 
@@ -44,6 +45,7 @@ async def try_on(session, model_img, dress_img):
     }
 
     async with session.post(API_URL, json=data, headers=headers) as res:
+        print("get task")
         res_json = await res.json()
         task_id = res_json['data']['task_id']
 
@@ -51,6 +53,7 @@ async def try_on(session, model_img, dress_img):
     status = "pending"
     while status in ["pending", "running", "processing"]:
         await asyncio.sleep(4)
+        print("status is not completed")
         async with session.get(check_url, headers=headers) as check_res:
             check_json = await check_res.json()
             status = check_json['data']['status']
@@ -109,4 +112,6 @@ def home():
 # ----------------------------
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))  # Render uses PORT env
+    print("app is running")
     app.run(host="0.0.0.0", port=port)
+
