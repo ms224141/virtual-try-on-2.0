@@ -2,3 +2,5 @@ flask
 aiohttp
 requests
 gunicorn
+dotenv
+
